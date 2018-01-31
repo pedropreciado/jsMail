@@ -17,7 +17,10 @@ class Router {
     let component = this.activeRoute();
 
     let p = document.createElement("p");
-    console.log(p);
+    if (component) {
+      this.node.appendChild(component.render());
+    }
+
     p.innerHTML = this.activeRoute();
     this.node.appendChild(p);
 
