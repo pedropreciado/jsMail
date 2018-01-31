@@ -7,7 +7,7 @@ module.exports = {
     item.classList.add("message");
 
     item.innerHTML = `
-    <span class="from">${message.from}</span>
+    <span class="to">${message.to}</span>
     <span class="subject">${message.subject}</span>
     <span class="body">${message.body}</span>
     `
@@ -18,12 +18,12 @@ module.exports = {
   render() {
     let ul = document.createElement("ul");
     ul.classList.add("messages");
-    let messages = MessageStore.getInboxMessages();
+    let messages = MessageStore.getSentMessages();
     messages.forEach((message) => {
       let newMessage = this.renderMessage(message);
       ul.appendChild(newMessage);
     })
-    
+
     return ul;
   }
 

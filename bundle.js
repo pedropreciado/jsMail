@@ -69,10 +69,11 @@
 
 let Router = __webpack_require__(1);
 let Inbox = __webpack_require__(2);
+let Sent = __webpack_require__(4);
 
 let routes = {
   inbox: Inbox,
-
+  sent: Sent
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -167,6 +168,7 @@ module.exports = {
       let newMessage = this.renderMessage(message);
       ul.appendChild(newMessage);
     })
+    
     return ul;
   }
 
@@ -204,19 +206,75 @@ let messages = {
   ]
 }
 
+class Message {
+  constructor(from, to, subject, body) {
+    this.from = from;
+    this.to = to;
+    this.subject = subject;
+    this.body = body;
+  }
+}
+
+let messageDraft = new Message;
+
 const messageStore = {
-  
+
   getInboxMessages() {
     return messages.inbox;
   },
 
   getSentMessages() {
     return messages.sent;
+  },
+
+  updateDraftField(field, value) {
+    messageDraft.field = value;
+  },
+
+  sendDraft() {
+    messages.sent.push(messageDraft);
+    messageDraft = new Message;
   }
 
 }
 
 module.exports = messageStore;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+let MessageStore = __webpack_require__(3);
+
+module.exports = {
+
+  renderMessage(message) {
+    let item = document.createElement("li");
+    item.classList.add("message");
+
+    item.innerHTML = `
+    <span class="to">${message.to}</span>
+    <span class="subject">${message.subject}</span>
+    <span class="body">${message.body}</span>
+    `
+
+    return item;
+  },
+
+  render() {
+    let ul = document.createElement("ul");
+    ul.classList.add("messages");
+    let messages = MessageStore.getSentMessages();
+    messages.forEach((message) => {
+      let newMessage = this.renderMessage(message);
+      ul.appendChild(newMessage);
+    })
+
+    return ul;
+  }
+
+}
 
 
 /***/ })
