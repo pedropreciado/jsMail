@@ -26,7 +26,7 @@ let messages = {
 }
 
 class Message {
-  constructor(from, to, subject, body) {
+  constructor(from = "", to = "", subject = "", body = "") {
     this.from = from;
     this.to = to;
     this.subject = subject;
@@ -51,7 +51,7 @@ const messageStore = {
   },
 
   updateDraftField(field, value) {
-    messageDraft.field = value;
+    messageDraft[field] = value;
   },
 
   sendDraft() {

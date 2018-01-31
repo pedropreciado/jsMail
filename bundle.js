@@ -82,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let content = document.querySelector(".content");
   let router = new Router(content, routes);
+  
   router.start();
 
   location.hash = "inbox";
@@ -209,7 +210,7 @@ let messages = {
 }
 
 class Message {
-  constructor(from, to, subject, body) {
+  constructor(from = "", to = "", subject = "", body = "") {
     this.from = from;
     this.to = to;
     this.subject = subject;
@@ -234,7 +235,7 @@ const messageStore = {
   },
 
   updateDraftField(field, value) {
-    messageDraft.field = value;
+    messageDraft[field] = value;
   },
 
   sendDraft() {
@@ -294,6 +295,11 @@ module.exports = {
     let div = document.createElement("div");
     div.classList.add("new-message");
     div.innerHTML = this.renderForm();
+    div.addEventListener("change", (event) => {
+      let target = event.target;
+      console.log(target);
+      MessageStore.updateDraftField(target.name, target.value);
+    });
     return div;
   },
 

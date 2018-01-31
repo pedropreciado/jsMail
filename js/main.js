@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let content = document.querySelector(".content");
   let router = new Router(content, routes);
+  
   router.start();
 
   location.hash = "inbox";
