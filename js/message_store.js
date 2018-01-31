@@ -26,10 +26,10 @@ let messages = {
 }
 
 const messageStore = {
-
+  
   getInboxMessages() {
     return messages.inbox;
-  }
+  },
 
   getSentMessages() {
     return messages.sent;
