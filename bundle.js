@@ -143,6 +143,20 @@ module.exports = Router;
 let MessageStore = __webpack_require__(3);
 
 module.exports = {
+
+  renderMessage(message) {
+    let item = document.createElement("li");
+    item.classList.add("message");
+
+    item.innerHTML = `
+    <span class="from">${message.from}</span>
+    <span class="subject">${message.subject}</span>
+    <span class="body">${message.body}</span>
+    `
+
+    return item;
+  },
+
   render() {
     let ul = document.createElement("ul");
     ul.classList.add("messages");
@@ -150,10 +164,10 @@ module.exports = {
     messages.forEach((message) => {
       let newMessage = this.renderMessage(message);
       ul.appendChild(newMessage);
-
     })
     return ul;
   }
+
 }
 
 
