@@ -1,3 +1,5 @@
+require("./router");
+
 document.addEventListener("DOMContentLoaded", () => {
 
   let navItems = Array.from(document.querySelectorAll(".sidebar-nav li"));
