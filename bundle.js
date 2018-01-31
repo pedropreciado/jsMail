@@ -99,8 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 class Router {
 
-  constructor(node) {
+  constructor(node, routes) {
     this.node = node;
+    this.routes = routes;
   }
 
   start() {
@@ -124,7 +125,8 @@ class Router {
   activeRoute() {
     let hashFragment = window.location.hash;
     hashFragment = hashFragment.substring(1, hashFragment.length);
-    return hashFragment;
+    let component = this.routes[hashFragment];
+    return component;
   }
 }
 
