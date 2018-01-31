@@ -70,16 +70,17 @@
 let Router = __webpack_require__(1);
 let Inbox = __webpack_require__(2);
 let Sent = __webpack_require__(4);
+let Compose = __webpack_require__(5);
 
 let routes = {
   inbox: Inbox,
-  sent: Sent
+  sent: Sent,
+  compose: Compose
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 
   let content = document.querySelector(".content");
-  console.log(!!content);
   let router = new Router(content, routes);
   router.start();
 
@@ -103,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
 class Router {
 
   constructor(node, routes) {
+    console.log(node, routes);
     this.node = node;
     this.routes = routes;
   }
@@ -276,6 +278,59 @@ module.exports = {
     })
 
     return ul;
+  }
+
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+let MessageStore = __webpack_require__(3);
+
+module.exports = {
+  render() {
+    let div = document.createElement("div");
+    div.classList.add("new-message");
+    div.innerHTML = this.renderForm();
+    return div;
+  },
+
+  renderForm() {
+    let draft = MessageStore.getMessageDraft();
+    let html = `
+    <p class='new-message-header'>'New Message'</p>
+    <form class='compose-form'>
+      <input
+      placeholder='Recipient'
+      name='to'
+      type='text'
+      value="${draft.to}">
+
+      <input
+      placeholder="Subject"
+      name="subject"
+      type="text"
+      value="${draft.subject}">
+
+      <textarea
+      name="body"
+      rows=20
+      >
+      ${draft.body}
+      </textarea>
+
+      <button
+      type="submit"
+      class="btn btn-primary submit-message"
+      >
+      Send
+      </button>
+    </form>
+    `
+
+    return html;
   }
 
 }

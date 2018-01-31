@@ -1,6 +1,7 @@
 class Router {
 
   constructor(node, routes) {
+    console.log(node, routes);
     this.node = node;
     this.routes = routes;
   }

@@ -1,21 +1,23 @@
-let MessageStore = require("message_store");
+let MessageStore = require("./message_store");
 
 module.exports = {
   render() {
     let div = document.createElement("div");
     div.classList.add("new-message");
-    div.innerHTML = this.renderForm;
+    div.innerHTML = this.renderForm();
+    return div;
   },
+
   renderForm() {
     let draft = MessageStore.getMessageDraft();
     let html = `
     <p class='new-message-header'>'New Message'</p>
-    <form class='componse-form'>
+    <form class='compose-form'>
       <input
       placeholder='Recipient'
       name='to'
       type='text'
-      value="${}">
+      value="${draft.to}">
 
       <input
       placeholder="Subject"
