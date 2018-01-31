@@ -67,18 +67,23 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
+let Router = __webpack_require__(1);
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  let content = document.querySelector(".content");
+  console.log(!!content);
+  let router = new Router(content);
+  router.start();
 
   let navItems = Array.from(document.querySelectorAll(".sidebar-nav li"));
   navItems.forEach((item) => {
     item.addEventListener("click", () => {
-      console.log("click");
       let name = item.innerText.toLowerCase();
       location.hash = name;
     })
   })
+
 })
 
 
@@ -87,7 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
 /***/ (function(module, exports) {
 
 class Router {
-  contructor(node) {
+
+  constructor(node) {
     this.node = node;
   }
 
@@ -103,8 +109,10 @@ class Router {
     let component = this.activeRoute();
 
     let p = document.createElement("p");
-    p.innerHTML = component;
+    console.log(p);
+    p.innerHTML = this.activeRoute();
     this.node.appendChild(p);
+
   }
 
   activeRoute() {
@@ -113,6 +121,8 @@ class Router {
     return hashFragment;
   }
 }
+
+module.exports = Router;
 
 
 /***/ })

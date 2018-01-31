@@ -1,5 +1,6 @@
 class Router {
-  contructor(node) {
+
+  constructor(node) {
     this.node = node;
   }
 
@@ -15,8 +16,10 @@ class Router {
     let component = this.activeRoute();
 
     let p = document.createElement("p");
-    p.innerHTML = component;
+    console.log(p);
+    p.innerHTML = this.activeRoute();
     this.node.appendChild(p);
+
   }
 
   activeRoute() {
@@ -25,3 +28,5 @@ class Router {
     return hashFragment;
   }
 }
+
+module.exports = Router;
