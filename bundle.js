@@ -68,12 +68,18 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 let Router = __webpack_require__(1);
+let Inbox = __webpack_require__(2);
+
+let routes = {
+  inbox: Inbox,
+
+}
 
 document.addEventListener("DOMContentLoaded", () => {
 
   let content = document.querySelector(".content");
   console.log(!!content);
-  let router = new Router(content);
+  let router = new Router(content, routes);
   router.start();
 
   let navItems = Array.from(document.querySelectorAll(".sidebar-nav li"));
@@ -123,6 +129,20 @@ class Router {
 }
 
 module.exports = Router;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = {
+  render() {
+    let ul = document.createElement("ul");
+    ul.classList.add("messages");
+    ul.innerHTML = "An Inbox Message";
+    return ul;
+  }
+}
 
 
 /***/ })
