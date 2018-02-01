@@ -295,11 +295,19 @@ module.exports = {
     let div = document.createElement("div");
     div.classList.add("new-message");
     div.innerHTML = this.renderForm();
+
     div.addEventListener("change", (event) => {
       let target = event.target;
-      console.log(target);
       MessageStore.updateDraftField(target.name, target.value);
     });
+
+    div.addEventListener("submit", (event) => {
+      event.preventDefault();
+      MessageStore.sendDraft();
+      window.location.hash = "inbox";
+    });
+
+
     return div;
   },
 
